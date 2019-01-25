@@ -1,6 +1,10 @@
 
 #include <millisDelay.h>
 
+unsigned long DOOR_CONTACT_DELAY = 300; // 0.3sec
+unsigned long doorContactDelayStart = 0; // the time the delay started
+bool doorContactDelayRunning = false; // true if still waiting for delay to finish
+
 unsigned long DOOR_OPEN_DELAY = 15000; // 15 sec
 unsigned long doorOpenDelayStart = 0; // the time the delay started
 bool doorOpenDelayRunning = false; // true if still waiting for delay to finish
@@ -31,9 +35,20 @@ void setup() {
 
 void loop() {
   cardReaderState = digitalRead(cardReader);
-  garageDoorState = digitalRead(garageDoor);
+  //garageDoorState = digitalRead(garageDoor);
   Serial.println(doorOpenDelayRunning);
-
+  
+  if(digitalRead(cardReader == HIGH){
+    doorContactDelayStart = millis();
+    doorContactDelayRunning = true;
+    garageDoorState = HIGH;
+  }
+     
+  if(doorContactDelayRunning && ((millis() - doorContactDelayStart) >= DOOR_CONTACT_DELAY)){
+    doorContactDelayRunning = false;
+    garageDoorState = LOW;
+  }
+  
   if(doorOpenDelayRunning && ((millis() - doorOpenDelayStart) >= DOOR_OPEN_DELAY)){
     doorOpenDelayRunning = false;
   }
