@@ -38,7 +38,7 @@ void loop() {
   //garageDoorState = digitalRead(garageDoor);
   Serial.println(doorOpenDelayRunning);
   
-  if(digitalRead(cardReader == HIGH){
+  if(digitalRead(cardReader == HIGH)){
     doorContactDelayStart = millis();
     doorContactDelayRunning = true;
     garageDoorState = HIGH;
